@@ -1,0 +1,184 @@
+<!--
+@license
+Copyright (c) 2017 Ars Nebula LLC.
+This code may be used under the terms found in LICENSE.md of this repository.
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../nebula-button-behavior/nebula-button-behavior.html">
+<link rel="import" href="../nebula-focus-behavior/nebula-focus-behavior.html">
+<link rel="import" href="../nebula-style-attributes-behavior/nebula-style-attributes-behavior.html">
+
+<!--
+`<nebula-icon-button>` is a web component to display an icon or icon toggle button.
+
+The default button behaves like a standard command button. The `toggle` attribute allows the button to behave like a switch or checkbox. The `pressed` property is used to determine when the button is in a pressed state.
+
+The element provides two visual state properties: the `icon` property is the icon used when the button is unpressed, and the `pressed-icon` is the icon which is displayed when the button is pressed.
+
+The element is easily styled with just two theme attributes: `size` and `color`. The element can also be styled using CSS variables and mixins.
+
+## Usage
+
+The following demonstrates the common set of properties and event handlers:
+
+```html
+<nebula-icon-button
+  id="button"
+  size="1rem"
+  color="inherit"
+  icon="bookmark-outline"
+  pressed-icon="bookmark"
+  toggle="[[toggle]]"
+  pressed="{{pressed}}"
+  on-tap="onButtonTap"
+  toggle>
+</nebula-icon-button>
+```
+
+## Style
+
+You can style the element using CSS custom properties and mixins:
+
+Custom property | Description | Default
+:--- | :--- | :---
+`--nebula-icon-button-size` | The size of the element icon | 1rem
+`--nebula-icon-button-color` | The element theme color | inherit
+`--nebula-icon-button-background-color` | The background color for the element. | transparent
+`--nebula-icon-button-transition-duration` | The background color for the element. | 0.2s
+`--nebula-icon-button` | A mixin applied to base element.
+`--nebula-icon-button-pressed` | A mixin applied to element when pressed.
+
+The following styles can also be set as attributes on the element:
+
+- `color`
+- `size`
+
+@demo demo/index.html
+-->
+
+<dom-module id="nebula-icon-button">
+  <template>
+    <style>
+      :host {
+        --nebula-icon-button-size: 1rem;
+        --nebula-icon-button-color: inherit;
+        --nebula-icon-button-background-color: transparent;
+        --nebula-icon-button-transition-duration: 0.2s;
+        display: inline-block;
+        position: relative;
+        box-sizing: content-box;
+        color: inherit;
+        margin: 0;
+        padding: 8px;
+        outline: none;
+        cursor: pointer;
+        border: 0;
+        border-radius: 50%;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        height: var(--nebula-icon-button-size);
+        width: var(--nebula-icon-button-size);
+        background-color: var(--nebula-button-background-color);
+        font-family: sans-serif;
+        font-size: 1rem;
+        line-height: 1rem;
+        text-align: center;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        transition: opacity 0.15s linear;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        @apply --nebula-icon-button;
+      }
+      #icon {
+        position: absolute;
+        height: 80%;
+        width: 80%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        visibility: visible;
+        transition: opacity var(--nebula-icon-button-transition-duration) linear;
+      }
+      #pressed-icon {
+        position: absolute;
+        height: 80%;
+        width: 80%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--nebula-icon-button-transition-duration) linear;
+      }
+      :host([pressed]) #icon {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--nebula-icon-button-transition-duration) linear, visibility 0s linear var(--nebula-icon-button-transition-duration);
+      }
+      :host([pressed]) #pressed-icon {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity var(--nebula-icon-button-transition-duration) linear;
+      }
+      :host([focusmode=key]):focus,
+      :host([focusmode=mouse]):hover {
+        color: var(--nebula-icon-button-color);
+        -webkit-box-shadow: 0px 0px 1px 1px var(--nebula-icon-button-color);
+        -moz-box-shadow: 0px 0px 1px 1px var(--nebula-icon-button-color);
+        box-shadow: 0px 0px 1px 1px var(--nebula-icon-button-color);
+      }
+      :host([pressed]) {
+        color: var(--nebula-icon-button-color);
+        @apply --nebula-icon-pressed
+      }
+      :host([disabled]) {
+        pointer-events: none;
+        cursor: default !important;
+        opacity: 0.4;
+        color: var(--nebula-icon-button-color) !important;
+      }
+    </style>
+    <iron-icon id="icon" icon="[[icon]]"></iron-icon>
+    <iron-icon id="pressed-icon" icon="[[pressedIcon]]"></iron-icon>
+  </template>
+  <script>
+    Polymer({
+      /**
+      * Event triggered when the button is clicked or toggled.
+      * @event clicked
+      */
+      is: 'nebula-icon-button',
+      behaviors: [
+        Nebula.ButtonBehavior,
+        Nebula.FocusBehavior,
+        Nebula.StyleAttributesBehavior
+      ],
+      hostAttributes: {
+        'role': 'button'
+      },
+      styleAttributes: {
+        'size': '--nebula-icon-button-size',
+        'color': '--nebula-icon-button-color'      },
+      properties: {
+        /**
+        * The icon to display when the element is not pressed.
+        */
+        icon: {
+          type: String
+        },
+        /**
+        * The icon to display when the element is pressed.
+        */
+        pressedIcon: {
+          type: String
+        }
+      }
+    })
+  </script>
+</dom-module>

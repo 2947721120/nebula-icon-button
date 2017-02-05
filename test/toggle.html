@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>nebula-icon-button</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <link rel="import" href="../../iron-test-helpers/iron-test-helpers.html">
+    <link rel="import" href="../../iron-icons/iron-icons.html">
+    <link rel="import" href="../nebula-icon-button.html">
+  </head>
+  <body>
+    <test-fixture id="toggle">
+      <template>
+        <nebula-icon-button
+          icon="icons:bookmark-border"
+          pressed-icon="icons:bookmark"
+          toggle>
+        </nebula-icon-button>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('toggle', function() {
+        var el
+        setup(function() {
+          el = fixture('toggle')
+        })
+        test('element is created', function() {
+          assert.equal(el.is, 'nebula-icon-button')
+        })
+        test('pressed defaults to false', function() {
+          assert.isFalse(el.pressed)
+        })
+        test('toggle set to true', function() {
+          assert.isTrue(el.toggle)
+        })
+        test('pressed after space key', function(done) {
+          el.addEventListener('click', function(e) {
+            assert.isTrue(el.pressed)
+            done()
+          })
+          MockInteractions.pressSpace(el)
+        })
+        test('pressed after enter key', function(done) {
+          el.addEventListener('click', function(e) {
+            assert.isTrue(el.pressed)
+            done()
+          })
+          MockInteractions.pressEnter(el)
+        })
+        test('pressed after tap event', function(done) {
+          el.addEventListener('click', function(e) {
+            assert.isTrue(el.pressed)
+            done()
+          })
+          MockInteractions.tap(el)
+        })
+      })
+    </script>
+  </body>
+</html>

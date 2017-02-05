@@ -1,0 +1,39 @@
+{
+  "name": "nebula-icon-button",
+  "description": "A web component to display an icon or icon toggle button.",
+  "license": "ISC",
+  "authors": [
+    "Chris Beckett <chrisb@arsnebula.com>"
+  ],
+  "homepage": "https://github.com/arsnebula/nebula-icon-button#README",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "keywords": [
+    "polymer",
+    "webcomponents",
+    "web-components",
+    "element",
+    "button",
+    "toggle",
+    "icon"
+  ],
+  "main": "nebula-icon-button.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.7.1",
+    "nebula-focus-behavior": "arsnebula/nebula-focus-behavior#^1.1.2",
+    "nebula-style-attributes-behavior": "arsnebula/nebula-style-attributes-behavior#^1.1.1",
+    "nebula-button-behavior": "arsnebula/nebula-button-behavior#^1.0.0",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.12"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+    "web-component-tester": "Polymer/web-component-tester#^5.0.0",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.4.0"
+  }
+}
