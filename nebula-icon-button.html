@@ -46,9 +46,9 @@ Custom property | Description | Default
 `--nebula-icon-button-size` | The size of the element icon | 1rem
 `--nebula-icon-button-color` | The element theme color | inherit
 `--nebula-icon-button-background-color` | The background color for the element. | transparent
-`--nebula-icon-button-transition-duration` | The background color for the element. | 0.2s
 `--nebula-icon-button` | A mixin applied to base element.
 `--nebula-icon-button-pressed` | A mixin applied to element when pressed.
+`--nebula-icon-button-disabled` | A mixin applied to element when disabled.
 
 The following styles can also be set as attributes on the element:
 
@@ -65,11 +65,10 @@ The following styles can also be set as attributes on the element:
         --nebula-icon-button-size: 1rem;
         --nebula-icon-button-color: inherit;
         --nebula-icon-button-background-color: transparent;
-        --nebula-icon-button-transition-duration: 0.2s;
         display: inline-block;
         position: relative;
         box-sizing: content-box;
-        color: inherit;
+        color: var(--nebula-icon-button-color);
         margin: 0;
         padding: 8px;
         outline: none;
@@ -82,15 +81,10 @@ The following styles can also be set as attributes on the element:
         height: var(--nebula-icon-button-size);
         width: var(--nebula-icon-button-size);
         background-color: var(--nebula-button-background-color);
-        font-family: sans-serif;
-        font-size: 1rem;
-        line-height: 1rem;
-        text-align: center;
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        transition: opacity 0.15s linear;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
         @apply --nebula-icon-button;
       }
@@ -101,9 +95,7 @@ The following styles can also be set as attributes on the element:
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        opacity: 1;
         visibility: visible;
-        transition: opacity var(--nebula-icon-button-transition-duration) linear;
       }
       #pressed-icon {
         position: absolute;
@@ -112,36 +104,28 @@ The following styles can also be set as attributes on the element:
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        opacity: 0;
         visibility: hidden;
-        transition: opacity var(--nebula-icon-button-transition-duration) linear;
       }
       :host([pressed]) #icon {
-        opacity: 0;
         visibility: hidden;
-        transition: opacity var(--nebula-icon-button-transition-duration) linear, visibility 0s linear var(--nebula-icon-button-transition-duration);
       }
       :host([pressed]) #pressed-icon {
-        opacity: 1;
         visibility: visible;
-        transition: opacity var(--nebula-icon-button-transition-duration) linear;
       }
       :host([focusmode=key]):focus,
       :host([focusmode=mouse]):hover {
-        color: var(--nebula-icon-button-color);
-        -webkit-box-shadow: 0px 0px 1px 1px var(--nebula-icon-button-color);
-        -moz-box-shadow: 0px 0px 1px 1px var(--nebula-icon-button-color);
-        box-shadow: 0px 0px 1px 1px var(--nebula-icon-button-color);
+        -webkit-box-shadow: 0px 0px 1px 1px currentColor;
+        -moz-box-shadow: 0px 0px 1px 1px currentColor;
+        box-shadow: 0px 0px 1px 1px currentColor;
       }
       :host([pressed]) {
-        color: var(--nebula-icon-button-color);
         @apply --nebula-icon-pressed
       }
       :host([disabled]) {
         pointer-events: none;
         cursor: default !important;
         opacity: 0.4;
-        color: var(--nebula-icon-button-color) !important;
+        @apply --nebula-icon-disabled
       }
     </style>
     <iron-icon id="icon" icon="[[icon]]"></iron-icon>

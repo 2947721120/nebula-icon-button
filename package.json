@@ -1,6 +1,6 @@
 {
   "name": "nebula-icon-button",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A web component to display an icon or icon toggle button.",
   "license": "ISC",
   "author": "Chris Beckett <chrisb@arsnebula.com>",
