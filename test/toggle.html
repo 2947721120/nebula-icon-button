@@ -16,7 +16,7 @@
       <template>
         <nebula-icon-button
           icon="icons:bookmark-border"
-          pressed-icon="icons:bookmark"
+          active-icon="icons:bookmark"
           toggle>
         </nebula-icon-button>
       </template>
@@ -38,21 +38,21 @@
           assert.isTrue(el.toggle)
         })
         test('pressed after space key', function(done) {
-          el.addEventListener('click', function(e) {
+          el.addEventListener('change', function(e) {
             assert.isTrue(el.pressed)
             done()
           })
           MockInteractions.pressSpace(el)
         })
         test('pressed after enter key', function(done) {
-          el.addEventListener('click', function(e) {
+          el.addEventListener('change', function(e) {
             assert.isTrue(el.pressed)
             done()
           })
           MockInteractions.pressEnter(el)
         })
         test('pressed after tap event', function(done) {
-          el.addEventListener('click', function(e) {
+          el.addEventListener('change', function(e) {
             assert.isTrue(el.pressed)
             done()
           })

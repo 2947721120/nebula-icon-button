@@ -5,6 +5,7 @@ This code may be used under the terms found in LICENSE.md of this repository.
 -->
 
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../nebula-button-behavior/nebula-button-behavior.html">
 <link rel="import" href="../nebula-focus-behavior/nebula-focus-behavior.html">
@@ -13,47 +14,83 @@ This code may be used under the terms found in LICENSE.md of this repository.
 <!--
 `<nebula-icon-button>` is a web component to display an icon or icon toggle button.
 
-The default button behaves like a standard command button. The `toggle` attribute allows the button to behave like a switch or checkbox. The `pressed` property is used to determine when the button is in a pressed state.
+The element behaves like a standard command button. The `toggle` attribute allows the button to behave like a switch or checkbox. The `pressed` property is used to determine when the button is in a pressed state.
 
-The element provides two visual state properties: the `icon` property is the icon used when the button is unpressed, and the `pressed-icon` is the icon which is displayed when the button is pressed.
+The normal or inactive state is determined by the the `icon` property, and the CSS variable `--nebula-icon-button-color`. You can also use the `color` style attribute inline on the element.
 
-The element is easily styled with just two theme attributes: `size` and `color`. The element can also be styled using CSS variables and mixins.
+The active state (`pushed` for a normal command button, and `pressed` for a toggle button) is determined by the `active-icon` and the CSS variables `--nebula-icon-button-active color` and `--nebula-icon-button-active-background-color`. If the `active-icon` is omitted, then the `icon` property value will be used for both inactive and active states. You can also use the `active-color` and `active-background-color` style attributes respectively.
+
+> Icon properties expect the `id` for any icon in an iconset database defined using [iron-iconset](https://www.webcomponents.org/element/PolymerElements/iron-iconset) or [iron-iconset-svg](https://www.webcomponents.org/element/PolymerElements/iron-iconset-svg).
 
 ## Usage
 
-The following demonstrates the common set of properties and event handlers:
+The following demonstrates the common set of properties and event handlers for a standard command button:
 
 ```html
 <nebula-icon-button
-  id="button"
-  size="1rem"
-  color="inherit"
-  icon="bookmark-outline"
-  pressed-icon="bookmark"
-  toggle="[[toggle]]"
-  pressed="{{pressed}}"
-  on-tap="onButtonTap"
+  icon="icons:bookmark"
+  active-color="darkred"
+  on-tap="_onTap">
+</nebula-icon-button>
+```
+
+or you can configure a toggle button:
+
+```html
+<nebula-icon-button
+  icon="icons:bookmark-outline"
+  active-icon="icons:bookmark"  
+  on-change="_onChange"
   toggle>
 </nebula-icon-button>
 ```
 
 ## Style
 
-You can style the element using CSS custom properties and mixins:
+The preferred approach to styling the element is using CSS custom properties and mixins.
+
+```css
+:host {
+  --nebula-icon-button-color: grey;
+  --nebula-icon-button-active-color: darkred;
+  --nebula-icon-button-icon-active: {
+    border-color: black;
+  }
+}
+```
+
+The following CSS properties and mixins are available for styling:
 
 Custom property | Description | Default
 :--- | :--- | :---
-`--nebula-icon-button-size` | The size of the element icon | 1rem
-`--nebula-icon-button-color` | The element theme color | inherit
-`--nebula-icon-button-background-color` | The background color for the element. | transparent
+
+`--nebula-icon-button-color` | The theme color for the element. | currentColor
+`--nebula-icon-button-active-color` | The theme color for the element when pushed or pressed. | currentColor
+`--nebula-icon-button-active-background-color` | The theme background color for the element when pushed or pressed. | transparent
+`--nebula-icon-button-size` | The theme size (height and width) of the element. | 1.5rem
 `--nebula-icon-button` | A mixin applied to base element.
-`--nebula-icon-button-pressed` | A mixin applied to element when pressed.
+`--nebula-icon-button-icon` | A mixin applied to icon container.
+`--nebula-icon-button-active` | A mixin applied to base element when pushed or pressed.
+`--nebula-icon-button-icon` | A mixin applied to icon container when pushed or pressed.
+`--nebula-icon-button-focus` | A mixin applied to element when focused.
 `--nebula-icon-button-disabled` | A mixin applied to element when disabled.
 
-The following styles can also be set as attributes on the element:
-
+For convenience, you can also apply a theme to the element using the following style attributes:
+ 
 - `color`
+- `active-color`
+- `active-background-color`
 - `size`
+
+```html
+<nebula-icon-button
+  color="dimgrey"
+  active-color="darkred"
+  active-background-color="black"
+  size="2rem">
+  My Icon Button
+</nebula-icon-button>
+```
 
 @demo demo/index.html
 -->
@@ -62,25 +99,16 @@ The following styles can also be set as attributes on the element:
   <template>
     <style>
       :host {
-        --nebula-icon-button-size: 1rem;
-        --nebula-icon-button-color: inherit;
-        --nebula-icon-button-background-color: transparent;
+        --nebula-icon-button-color: currentColor;
+        --nebula-icon-button-active-color: var(--nebula--icon-button-color);
+        --nebula-icon-button-active-background-color: transparent;
+        --nebula-icon-button-size: 1.5rem;
         display: inline-block;
-        position: relative;
-        box-sizing: content-box;
-        color: var(--nebula-icon-button-color);
-        margin: 0;
-        padding: 8px;
-        outline: none;
         cursor: pointer;
+        margin: 4px;
+        padding: 0;
         border: 0;
-        border-radius: 50%;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
-        height: var(--nebula-icon-button-size);
-        width: var(--nebula-icon-button-size);
-        background-color: var(--nebula-button-background-color);
+        outline: 0;
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
@@ -88,55 +116,92 @@ The following styles can also be set as attributes on the element:
         -webkit-tap-highlight-color: rgba(0,0,0,0);
         @apply --nebula-icon-button;
       }
+      :host([direction=horizontal]) {
+        @apply --layout-horizontal;
+        @apply --layout-center;
+        @apply --layout-inline;
+      }
+      :host([direction=vertical]) {
+        @apply --layout-vertical;
+        @apply --layout-center;
+        @apply --layout-inline;
+      }
       #icon {
+        position: relative;
+        height: var(--nebula-icon-button-size);
+        width: var(--nebula-icon-button-size);
+        color: var(--nebula-icon-button-color);
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 2px;
+        transition: background-color 0.2s ease;
+        @apply --nebula-icon-button-icon;
+      }
+      #icon > * {
         position: absolute;
-        height: 80%;
-        width: 80%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        height: 100%;
+        width: 100%;
+      }
+      #inactive {
         visibility: visible;
       }
-      #pressed-icon {
-        position: absolute;
-        height: 80%;
-        width: 80%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+      #active {
         visibility: hidden;
       }
-      :host([pressed]) #icon {
-        visibility: hidden;
+      #label:empty {
+        display: none !important;
       }
-      :host([pressed]) #pressed-icon {
+      #label {
+        @apply --nebula-icon-button-label;
+      }
+      :host[direction=horizontal] #label {
+        margin: 0 0 0 4px;
+      }
+      :host[direction=vertical] #label {
+        margin: 4px 0 0 0;
+      }
+      :host([pressed]),
+      :host([pushed]) {
+        color: var(--nebula-icon-button-active-color);
+        @apply --nebula-icon-button-active;
+      }
+      :host([pressed]) > #icon,
+      :host([pushed]) > #icon {
+        border-color: var(--nebula-icon-button-active-background-color);
+        background-color: var(--nebula-icon-button-active-background-color);
+        @apply --nebula-icon-button-active-icon;
+      }
+      :host([pressed]) #active,
+      :host([pushed]) #active {
         visibility: visible;
       }
-      :host([focusmode=key]):focus,
-      :host([focusmode=mouse]):hover {
-        -webkit-box-shadow: 0px 0px 1px 1px currentColor;
-        -moz-box-shadow: 0px 0px 1px 1px currentColor;
-        box-shadow: 0px 0px 1px 1px currentColor;
+      :host([pressed]) #inactive,
+      :host([pushed]) #inactive {
+        visibility: hidden;
       }
-      :host([pressed]) {
-        @apply --nebula-icon-pressed
+      :host([focusmode=key]):focus > #icon,
+      :host([focusmode=mouse]):hover > #icon {
+        box-shadow: 0px 0px 1px 1px var(--nebula-icon-button-color);
+        @apply --nebula-icon-button-focus;
       }
       :host([disabled]) {
         pointer-events: none;
         cursor: default !important;
-        opacity: 0.4;
-        @apply --nebula-icon-disabled
+        opacity: 0.6;
+        @apply --nebula-icon-button-disabled;
       }
     </style>
-    <iron-icon id="icon" icon="[[icon]]"></iron-icon>
-    <iron-icon id="pressed-icon" icon="[[pressedIcon]]"></iron-icon>
+    <div id="icon">
+      <iron-icon id="inactive" icon="[[icon]]"></iron-icon>
+      <iron-icon id="active" icon="[[computedActiveIcon]]"></iron-icon>
+    </div>
+    <span id="label">
+      <slot id="content"></slot>
+    </span>
   </template>
   <script>
     Polymer({
-      /**
-      * Event triggered when the button is clicked or toggled.
-      * @event clicked
-      */
       is: 'nebula-icon-button',
       behaviors: [
         Nebula.ButtonBehavior,
@@ -146,9 +211,12 @@ The following styles can also be set as attributes on the element:
       hostAttributes: {
         'role': 'button'
       },
-      styleAttributes: {
-        'size': '--nebula-icon-button-size',
-        'color': '--nebula-icon-button-color'      },
+      _styleAttributes: {
+        'color': '--nebula-icon-button-color',
+        'active-color': '--nebula-icon-button-active-color',
+        'active-background-color': '--nebula-icon-button-active-background-color',
+        'size': '--nebula-icon-button-size'        
+      },
       properties: {
         /**
         * The icon to display when the element is not pressed.
@@ -157,11 +225,35 @@ The following styles can also be set as attributes on the element:
           type: String
         },
         /**
-        * The icon to display when the element is pressed.
+        * The icon to display when the element is pressed or pushed down.
+        * If not specified, the default icon will be used for all states.
         */
-        pressedIcon: {
-          type: String
+        activeIcon: {
+          type: String,
+          value: null
+        },
+        /**
+        * The alignment of the icon and label.
+        * Acceptable values are `horizontal` and `vertical`.
+        */
+        direction: {
+          type: String,
+          reflectToAttribute: true,
+          value: 'horizontal'
+        },
+        /**
+        * The `activeIcon` if provided, otherwise `icon`.
+        */
+        computedActiveIcon: {
+          type: String,
+          computed: '_computeActiveIcon(icon, activeIcon)'
         }
+      },
+      /**
+      * Computed property handler for `activeIcon`.
+      */
+      _computeActiveIcon: function(icon, activeIcon) {
+        return activeIcon || icon
       }
     })
   </script>

@@ -31,28 +31,105 @@
   <body>
 
     <div class="vertical-section-container">
-      <h3>Standard Icon Button</h3>
+      <h3>Icon Button</h3>
       <demo-snippet>
-        <template is="dom-bind" id="demo">
+        <template is="dom-bind">
+          <div class="light">
+            <nebula-icon-button icon="icons:menu" active-color="teal">
+            </nebula-icon-button>
+          </div>
+          <div class="dark">
+            <nebula-icon-button icon="icons:menu" active-color="teal">
+            </nebula-icon-button>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container">
+      <h3>Disabled Icon Button</h3>
+      <demo-snippet>
+        <template is="dom-bind">
+          <div class="light">
+            <nebula-icon-button icon="icons:menu" tabindex="-1" disabled>
+            </nebula-icon-button>
+          </div>
+          <div class="dark">
+            <nebula-icon-button icon="icons:menu" tabindex="-1" disabled>
+            </nebula-icon-button>
+        </template>
+      </demo-snippet>
+    </div>    
+
+    <div class="vertical-section-container">
+      <h3>Icon Button with Label (Horizontal)</h3>
+      <demo-snippet>
+        <template is="dom-bind">
           <div class="light">
             <nebula-icon-button
-              icon="icons:bookmark-border"
-              pressed-icon="icons:bookmark">
+              icon="icons:menu"
+              direction="horizontal"
+              active-color="teal">
+              Icon Button
             </nebula-icon-button>
             <nebula-icon-button
-              icon="icons:bookmark-border"
-              pressed-icon="icons:bookmark" disabled>
+              icon="icons:menu"
+              direction="horizontal"
+              active-color="teal"
+              tabindex="-1" disabled>
+              Disabled
             </nebula-icon-button>
           </div>
           <div class="dark">
             <nebula-icon-button
-              icon="icons:bookmark-border"
-              pressed-icon="icons:bookmark">
+              icon="icons:menu"
+              active-color="teal"
+              direction="horizontal">
+              Icon Button
             </nebula-icon-button>
             <nebula-icon-button
-              icon="icons:bookmark-border"
-              pressed-icon="icons:bookmark" disabled>
+              active-color="teal"
+              icon="icons:menu"
+              direction="horizontal"
+              tabindex="-1" disabled>
+              Disabled
             </nebula-icon-button>
+          </div>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container">
+      <h3>Icon Button with Label (Vertical)</h3>
+      <demo-snippet>
+        <template is="dom-bind">
+          <div class="light">
+            <nebula-icon-button
+              active-color="teal"
+              icon="icons:menu"
+              direction="vertical">
+              Icon Button
+            </nebula-icon-button>
+            <nebula-icon-button
+              icon="icons:menu"
+              direction="vertical"
+              tabindex="-1" disabled>
+              Disabled
+            </nebula-icon-button>
+          </div>
+          <div class="dark">
+            <nebula-icon-button
+              active-color="teal"
+              icon="icons:menu"
+              direction="vertical">
+              Icon Button
+            </nebula-icon-button>
+            <nebula-icon-button
+              icon="icons:menu"
+              direction="vertical"
+              tabindex="-1" disabled>
+              Disabled
+            </nebula-icon-button>
+          </div>
         </template>
       </demo-snippet>
     </div>
@@ -60,29 +137,21 @@
     <div class="vertical-section-container">
       <h3>Toggle Icon Button</h3>
       <demo-snippet>
-        <template is="dom-bind" id="demo">
+        <template is="dom-bind">
           <div class="light">
             <nebula-icon-button
               icon="icons:bookmark-border"
-              pressed-icon="icons:bookmark"
+              active-icon="icons:bookmark"
               toggle>
-            </nebula-icon-button>
-            <nebula-icon-button
-              icon="icons:bookmark-border"
-              pressed-icon="icons:bookmark"
-              toggle disabled>
+              Toggle Button
             </nebula-icon-button>
           </div>
           <div class="dark">
             <nebula-icon-button
               icon="icons:bookmark-border"
-              pressed-icon="icons:bookmark"
+              active-icon="icons:bookmark"
               toggle>
-            </nebula-icon-button>
-            <nebula-icon-button
-              icon="icons:bookmark-border"
-              pressed-icon="icons:bookmark"
-              toggle disabled>
+              Toggle Button
             </nebula-icon-button>
         </template>
       </demo-snippet>
@@ -91,20 +160,20 @@
     <div class="vertical-section-container">
       <h3>Icon Button Color</h3>
       <demo-snippet>
-        <template is="dom-bind" id="demo">
+        <template is="dom-bind">
           <nebula-icon-button
             icon="icons:bookmark-border"
-            pressed-icon="icons:bookmark"
+            active-icon="icons:bookmark"
             color="darkred">
           </nebula-icon-button>
           <nebula-icon-button
             icon="icons:bookmark-border"
-            pressed-icon="icons:bookmark"
+            active-icon="icons:bookmark"
             color="olive">
           </nebula-icon-button>
           <nebula-icon-button
             icon="icons:bookmark-border"
-            pressed-icon="icons:bookmark"
+            active-icon="icons:bookmark"
             color="steelblue">
           </nebula-icon-button>
         </template>
@@ -114,21 +183,21 @@
     <div class="vertical-section-container">
       <h3>Icon Button Size</h3>
       <demo-snippet>
-        <template is="dom-bind" id="demo">
+        <template is="dom-bind">
           <nebula-icon-button
             icon="icons:bookmark-border"
-            pressed-icon="icons:bookmark"
-            size="1rem">
+            active-icon="icons:bookmark"
+            size="1.5rem">
           </nebula-icon-button>
           <nebula-icon-button
             icon="icons:bookmark-border"
-            pressed-icon="icons:bookmark"
+            active-icon="icons:bookmark"
             size="2rem">
           </nebula-icon-button>
           <nebula-icon-button
             icon="icons:bookmark-border"
-            pressed-icon="icons:bookmark"
-            size="3rem">
+            active-icon="icons:bookmark"
+            size="2.5rem">
           </nebula-icon-button>
         </template>
       </demo-snippet>
