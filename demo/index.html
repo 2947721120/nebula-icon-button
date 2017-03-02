@@ -10,36 +10,102 @@
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../../iron-icons/iron-icons.html">
     <link rel="import" href="../../iron-icon/iron-icon.html">
+    <link rel="import" href="../../iron-flex-layout/iron-flex-layout-classes.html">
+    <link rel="import" href="../../iron-label/iron-label.html">
     <link rel="import" href="../nebula-icon-button.html">
-    <style is="custom-style" include="demo-pages-shared-styles">
-      .light {
-        display: inline-block;
-        background-color: white;
-        color: black;
-        padding: 16px;
-        border: 1px solid black;
-      }
-      .dark {
-        display: inline-block;
-        background-color: black;
-        color: white;
-        padding: 16px;
-        border: 1px solid black;
-      }
-    </style>
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles iron-flex iron-flex-alignment">
+        .light {
+          display: inline-block;
+          background-color: white;
+          color: black;
+          padding: 8px;
+          border: 1px solid black;
+        }
+        .dark {
+          display: inline-block;
+          background-color: black;
+          color: white;
+          padding: 8px;
+          border: 1px solid black;
+        }
+        nebula-icon-button[active].highlight {
+          background-color: var(--nebula-icon-button-color, teal);
+          color: white;
+        }
+        .theme1 {
+          --nebula-icon-button-size: 1.5rem;
+          --nebula-icon-button-color: darkred;
+        }
+        .theme2 {
+          --nebula-icon-button-size: 2rem;
+          --nebula-icon-button-color: olive;
+        }
+        .theme3 {
+          --nebula-icon-button-size: 2.5rem;
+          --nebula-icon-button-color: darkblue;
+        }
+      </style>
+    </custom-style>
   </head>
   <body>
 
     <div class="vertical-section-container">
-      <h3>Icon Button</h3>
+      <h3>Basic Icon Button</h3>
       <demo-snippet>
         <template is="dom-bind">
           <div class="light">
-            <nebula-icon-button icon="icons:menu" active-color="teal">
+            <nebula-icon-button icon="icons:menu" class="highlight">
             </nebula-icon-button>
           </div>
           <div class="dark">
-            <nebula-icon-button icon="icons:menu" active-color="teal">
+            <nebula-icon-button icon="icons:menu" class="highlight">
+            </nebula-icon-button>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container">
+      <h3>Icon Button with Label</h3>
+      <demo-snippet>
+        <template is="dom-bind">
+          <div class="light">
+            <iron-label class="layout inline horizontal center">
+              <nebula-icon-button icon="icons:menu" class="highlight">
+              </nebula-icon-button>
+              Icon Button
+            </iron-label>
+          </div>
+          <div class="dark">
+            <iron-label class="layout inline horizontal center">
+              <nebula-icon-button icon="icons:menu" class="highlight">
+              </nebula-icon-button>
+              Icon Button
+            </iron-label>
+        </template>
+      </demo-snippet>
+    </div>
+
+
+
+    <div class="vertical-section-container">
+      <h3>Icon Toggle Button</h3>
+      <demo-snippet>
+        <template is="dom-bind">
+          <div class="light">
+            <nebula-icon-button
+              icon="icons:bookmark-border"
+              active-icon="icons:bookmark"
+              toggle>
+              Toggle Button
+            </nebula-icon-button>
+          </div>
+          <div class="dark">
+            <nebula-icon-button
+              icon="icons:bookmark-border"
+              active-icon="icons:bookmark"
+              toggle>
+              Toggle Button
             </nebula-icon-button>
         </template>
       </demo-snippet>
@@ -58,146 +124,26 @@
             </nebula-icon-button>
         </template>
       </demo-snippet>
-    </div>    
+    </div> 
 
     <div class="vertical-section-container">
-      <h3>Icon Button with Label (Horizontal)</h3>
-      <demo-snippet>
-        <template is="dom-bind">
-          <div class="light">
-            <nebula-icon-button
-              icon="icons:menu"
-              direction="horizontal"
-              active-color="teal">
-              Icon Button
-            </nebula-icon-button>
-            <nebula-icon-button
-              icon="icons:menu"
-              direction="horizontal"
-              active-color="teal"
-              tabindex="-1" disabled>
-              Disabled
-            </nebula-icon-button>
-          </div>
-          <div class="dark">
-            <nebula-icon-button
-              icon="icons:menu"
-              active-color="teal"
-              direction="horizontal">
-              Icon Button
-            </nebula-icon-button>
-            <nebula-icon-button
-              active-color="teal"
-              icon="icons:menu"
-              direction="horizontal"
-              tabindex="-1" disabled>
-              Disabled
-            </nebula-icon-button>
-          </div>
-        </template>
-      </demo-snippet>
-    </div>
-
-    <div class="vertical-section-container">
-      <h3>Icon Button with Label (Vertical)</h3>
-      <demo-snippet>
-        <template is="dom-bind">
-          <div class="light">
-            <nebula-icon-button
-              active-color="teal"
-              icon="icons:menu"
-              direction="vertical">
-              Icon Button
-            </nebula-icon-button>
-            <nebula-icon-button
-              icon="icons:menu"
-              direction="vertical"
-              tabindex="-1" disabled>
-              Disabled
-            </nebula-icon-button>
-          </div>
-          <div class="dark">
-            <nebula-icon-button
-              active-color="teal"
-              icon="icons:menu"
-              direction="vertical">
-              Icon Button
-            </nebula-icon-button>
-            <nebula-icon-button
-              icon="icons:menu"
-              direction="vertical"
-              tabindex="-1" disabled>
-              Disabled
-            </nebula-icon-button>
-          </div>
-        </template>
-      </demo-snippet>
-    </div>
-
-    <div class="vertical-section-container">
-      <h3>Toggle Icon Button</h3>
-      <demo-snippet>
-        <template is="dom-bind">
-          <div class="light">
-            <nebula-icon-button
-              icon="icons:bookmark-border"
-              active-icon="icons:bookmark"
-              toggle>
-              Toggle Button
-            </nebula-icon-button>
-          </div>
-          <div class="dark">
-            <nebula-icon-button
-              icon="icons:bookmark-border"
-              active-icon="icons:bookmark"
-              toggle>
-              Toggle Button
-            </nebula-icon-button>
-        </template>
-      </demo-snippet>
-    </div>
-
-    <div class="vertical-section-container">
-      <h3>Icon Button Color</h3>
+      <h3>Icon Button Styles</h3>
       <demo-snippet>
         <template is="dom-bind">
           <nebula-icon-button
             icon="icons:bookmark-border"
             active-icon="icons:bookmark"
-            color="darkred">
+            class="theme1">
           </nebula-icon-button>
           <nebula-icon-button
             icon="icons:bookmark-border"
             active-icon="icons:bookmark"
-            color="olive">
+            class="theme2">
           </nebula-icon-button>
           <nebula-icon-button
             icon="icons:bookmark-border"
             active-icon="icons:bookmark"
-            color="steelblue">
-          </nebula-icon-button>
-        </template>
-      </demo-snippet>
-    </div>
-
-    <div class="vertical-section-container">
-      <h3>Icon Button Size</h3>
-      <demo-snippet>
-        <template is="dom-bind">
-          <nebula-icon-button
-            icon="icons:bookmark-border"
-            active-icon="icons:bookmark"
-            size="1.5rem">
-          </nebula-icon-button>
-          <nebula-icon-button
-            icon="icons:bookmark-border"
-            active-icon="icons:bookmark"
-            size="2rem">
-          </nebula-icon-button>
-          <nebula-icon-button
-            icon="icons:bookmark-border"
-            active-icon="icons:bookmark"
-            size="2.5rem">
+            class="theme3">
           </nebula-icon-button>
         </template>
       </demo-snippet>

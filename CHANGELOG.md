@@ -1,6 +1,14 @@
 # Change Log
 
-## [v1.1.0](https://github.com/arsnebula/nebula-icon-button/releases/tag/v1.0.1) (2017-02-09)
+## [v1.2.0](https://github.com/arsnebula/nebula-icon-button/releases/tag/v1.2.0) (2017-03-02)
+
+- Removed style attributes behavior. **BREAKING**
+- Removed caption support. **BREAKING**
+- Added global style defaults.
+- Modified styles to support updated behavior attributes (active, focused).
+- Simplified structure by using only a single icon child element.
+
+## [v1.1.0](https://github.com/arsnebula/nebula-icon-button/releases/tag/v1.1.0) (2017-02-09)
 
 - Updated version dependencies on behaviors.
 - Added label slot and direction property for horz/vert layout.
