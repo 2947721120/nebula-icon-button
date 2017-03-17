@@ -4,8 +4,9 @@ Copyright (c) 2017 Ars Nebula LLC.
 This code may be used under the terms found in LICENSE.md of this repository.
 -->
 
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../shadycss/apply-shim.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../nebula-icons/nebula-icons.html">
 <link rel="import" href="../nebula-button-behavior/nebula-button-behavior.html">
 <link rel="import" href="../nebula-focus-behavior/nebula-focus-behavior.html">
 
@@ -110,6 +111,7 @@ Custom property | Description | Default
         position: absolute;
         height: 100%;
         width: 100%;
+        margin: 0;
       }
       :host([active]) {
         @apply --nebula-icon-button-active;
@@ -118,6 +120,9 @@ Custom property | Description | Default
         box-shadow: 0px 0px 1px 1px var(--nebula-icon-button-color, var(--nebula-icon-button-default-color));
         @apply --nebula-icon-button-focused;
       }
+      :host([hidden]) {
+        display: none;
+      }
       :host([disabled]) {
         pointer-events: none;
         cursor: default;
@@ -125,51 +130,61 @@ Custom property | Description | Default
         @apply --nebula-icon-button-disabled;
       }
     </style>
-    <iron-icon id="icon" icon="[[$icon]]"></iron-icon>
+    <nebula-icon id="icon" icon="[[_icon]]"></nebula-icon>
   </template>
   <script>
-    Polymer({
-      is: 'nebula-icon-button',
-      behaviors: [
-        Nebula.ButtonBehavior,
-        Nebula.FocusBehavior
-      ],
-      hostAttributes: {
-        'role': 'button'
-      },
-      properties: {
-        /**
-        * The icon to display when the element is not pressed.
-        */
-        icon: {
-          type: String,
-          reflectToAttribute: true,
-          value: null
-        },
-        /**
-        * The icon to display when the element is pressed or pushed down.
-        * If not specified, the default icon will be used for all states.
-        */
-        activeIcon: {
-          type: String,
-          reflectToAttribute: true,
-          value: null
-        },
-        /**
-        * The `activeIcon` if provided, otherwise `icon`.
-        */
-        $icon: {
-          type: String,
-          computed: '_computeIcon(icon, activeIcon, active)'
+  (function() {
+    'use strict'
+
+    class NebulaIconButton extends Nebula.ButtonBehavior(Nebula.FocusBehavior(Polymer.Element)) {
+
+      static get is() { return 'nebula-icon-button' }
+
+      static get properties() {
+        return {
+          /**
+          * The icon to display when the element is not pressed.
+          */
+          icon: {
+            type: String,
+            reflectToAttribute: true,
+            value: null
+          },
+          /**
+          * The icon to display when the element is pressed or pushed down.
+          * If not specified, the default icon will be used for all states.
+          */
+          activeIcon: {
+            type: String,
+            reflectToAttribute: true,
+            value: null
+          },
+          /**
+          * The `activeIcon` if provided, otherwise `icon`.
+          */
+          _icon: {
+            type: String,
+            computed: '_computeIcon(icon, activeIcon, active)'
+          }
         }
-      },
+      }
+
+      ready() {
+        super.ready();
+        this.setAttribute('role', 'button')
+      }
+
       /**
       * Computed property handler for `activeIcon`.
       */
-      _computeIcon: function(icon, activeIcon, active) {
+      _computeIcon(icon, activeIcon, active) {
         if (icon === void(0) || active === void(0)) return
         return (!!active) ? activeIcon || icon : icon
       }
-    })
+
+    }
+
+    customElements.define(NebulaIconButton.is, NebulaIconButton)
+  }())
   </script>
 </dom-module>

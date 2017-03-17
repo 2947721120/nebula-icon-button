@@ -5,13 +5,24 @@
     <title>nebula-icon-button</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
     <link rel="import" href="../../iron-test-helpers/iron-test-helpers.html">
-    <link rel="import" href="../../iron-icons/iron-icons.html">
+    <link rel="import" href="../../nebula-icons/nebula-icons.html">
     <link rel="import" href="../nebula-icon-button.html">
   </head>
   <body>
+
+    <nebula-iconset name="icons" size="24">
+      <svg>
+        <defs>
+          <g id="bookmark"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></g>
+          <g id="bookmark-border"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"></path></g>
+          <g id="menu"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></g>
+        </defs>
+      </svg>
+    </nebula-iconset>
+
     <test-fixture id="toggle">
       <template>
         <nebula-icon-button
@@ -28,8 +39,8 @@
         setup(function() {
           el = fixture('toggle')
         })
-        test('element is created', function() {
-          assert.equal(el.is, 'nebula-icon-button')
+        test('element is upgraded', function() {
+          assert.equal(el.constructor.is, 'nebula-icon-button')
         })
         test('pressed defaults to false', function() {
           assert.isFalse(el.pressed)
@@ -37,14 +48,14 @@
         test('toggle set to true', function() {
           assert.isTrue(el.toggle)
         })
-        test('pressed after space key', function(done) {
+        test('pressed after SPACE key press', function(done) {
           el.addEventListener('change', function(e) {
             assert.isTrue(el.pressed)
             done()
           })
           MockInteractions.pressSpace(el)
         })
-        test('pressed after enter key', function(done) {
+        test('pressed after ENTER keypress', function(done) {
           el.addEventListener('change', function(e) {
             assert.isTrue(el.pressed)
             done()

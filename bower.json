@@ -1,7 +1,8 @@
 {
   "name": "nebula-icon-button",
-  "description": "A web component to display an icon or icon toggle button.",
+  "description": "A customizable icon or icon toggle button.",
   "license": "ISC",
+  "private": true,
   "authors": [
     "Chris Beckett <chrisb@arsnebula.com>"
   ],
@@ -16,24 +17,24 @@
     "polymer",
     "webcomponents",
     "web-components",
-    "element",
+    "customelements",
+    "custom-elemennts",
     "button",
     "toggle",
     "icon"
   ],
   "main": "nebula-icon-button.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.7.1",
-    "iron-icon": "PolymerElements/iron-icon#^1.0.12",
-    "nebula-focus-behavior": "arsnebula/nebula-focus-behavior#^1.2.0",
-    "nebula-button-behavior": "arsnebula/nebula-button-behavior#^1.1.3"
+    "polymer": "Polymer/polymer#2.0.0-rc.2",
+    "nebula-focus-behavior": "arsnebula/nebula-focus-behavior#v2-preview",
+    "nebula-button-behavior": "arsnebula/nebula-button-behavior#v2-preview",
+    "nebula-icons": "arsnebula/nebula-icons#v2-preview"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
-    "web-component-tester": "Polymer/web-component-tester#^5.0.0",
-    "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.4.0",
-    "iron-label": "PolymerElements/iron-label#^1.0.2"
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#2.0-preview",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.5",
+    "nebula-label": "arsnebula/nebula-label#v2-preview"
   }
 }

@@ -5,16 +5,14 @@
     <title>nebula-icon-button</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../../iron-icons/iron-icons.html">
-    <link rel="import" href="../../iron-icon/iron-icon.html">
-    <link rel="import" href="../../iron-flex-layout/iron-flex-layout-classes.html">
-    <link rel="import" href="../../iron-label/iron-label.html">
+    <link rel="import" href="../../nebula-icons/nebula-icons.html">
+    <link rel="import" href="../../nebula-label/nebula-label.html">
     <link rel="import" href="../nebula-icon-button.html">
     <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles iron-flex iron-flex-alignment">
+      <style include="demo-pages-shared-styles">
         .light {
           display: inline-block;
           background-color: white;
@@ -50,6 +48,16 @@
   </head>
   <body>
 
+    <nebula-iconset name="icons" size="24">
+      <svg>
+        <defs>
+          <g id="bookmark"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></g>
+          <g id="bookmark-border"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"></path></g>
+          <g id="menu"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></g>
+        </defs>
+      </svg>
+    </nebula-iconset>
+
     <div class="vertical-section-container">
       <h3>Basic Icon Button</h3>
       <demo-snippet>
@@ -70,23 +78,21 @@
       <demo-snippet>
         <template is="dom-bind">
           <div class="light">
-            <iron-label class="layout inline horizontal center">
+            <nebula-label>
               <nebula-icon-button icon="icons:menu" class="highlight">
               </nebula-icon-button>
               Icon Button
-            </iron-label>
+            </nebula-label>
           </div>
           <div class="dark">
-            <iron-label class="layout inline horizontal center">
+            <nebula-label>
               <nebula-icon-button icon="icons:menu" class="highlight">
               </nebula-icon-button>
               Icon Button
-            </iron-label>
+            </nebula-label>
         </template>
       </demo-snippet>
     </div>
-
-
 
     <div class="vertical-section-container">
       <h3>Icon Toggle Button</h3>

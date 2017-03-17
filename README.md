@@ -1,11 +1,9 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/arsnebula/nebula-icon-button)
 [![Gitter chat](https://badges.gitter.im/org.png)](https://gitter.im/arsnebula/webcomponents)
 
-[![Build Status](https://saucelabs.com/browser-matrix/arsnebula.svg)](https://saucelabs.com/beta/builds/813e9ac917864325aec01ded13cbc9b8)
-
 # \<nebula-icon-button\>
 
-A web component to display an icon or icon toggle button.
+A customizable icon or icon toggle button.
 
 * Allows toggling between two configurable icons
 * Supports standard and toggle modes
@@ -32,7 +30,6 @@ Add and configure the element as a standard command button.
 ```html
 <nebula-icon-button
   icon="icons:bookmark"
-  active-color="darkred"
   on-tap="_onTap">
   My Icon Button
 </nebula-icon-button>
@@ -44,8 +41,6 @@ or a toggle button:
 <nebula-icon-button
   icon="icons:bookmark-border"
   active-icon="icons:bookmark"
-  active-color="white"
-  active-background-color="black"
   pressed="{{pressed}}"
   on-change="_onChange"
   toggle>
@@ -53,7 +48,7 @@ or a toggle button:
 </nebula-icon-button>
 ```
 
-> Icon properties expect the `id` for any icon in an iconset database defined using [iron-iconset](https://www.webcomponents.org/element/PolymerElements/iron-iconset) or [iron-iconset-svg](https://www.webcomponents.org/element/PolymerElements/iron-iconset-svg).
+> The element icon properties support [nebula-icons] and expect a key to an icon in a published iconset. For more information see the **nebula-icons** documentation.
 
 *For more information on element properties and methods see the element API documentation.*
 

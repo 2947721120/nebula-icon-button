@@ -1,5 +1,10 @@
 # Change Log
 
+## [v2.0.0](https://github.com/arsnebula/nebula-icon-button/releases/tag/v2.0.0) (PENDING)
+
+- Upgraded element to Polymer v2 ES2015 class-style element.
+- Replaced iron-icons with nebula-icons.
+
 ## [v1.2.0](https://github.com/arsnebula/nebula-icon-button/releases/tag/v1.2.0) (2017-03-02)
 
 - Removed style attributes behavior. **BREAKING**
