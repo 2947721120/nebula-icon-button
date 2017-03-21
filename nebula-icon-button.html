@@ -6,6 +6,7 @@ This code may be used under the terms found in LICENSE.md of this repository.
 
 <link rel="import" href="../shadycss/apply-shim.html">
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../nebula-element-mixin/nebula-element-mixin.html">
 <link rel="import" href="../nebula-icons/nebula-icons.html">
 <link rel="import" href="../nebula-button-behavior/nebula-button-behavior.html">
 <link rel="import" href="../nebula-focus-behavior/nebula-focus-behavior.html">
@@ -69,7 +70,6 @@ Custom property | Description
 `--nebula-icon-button` | Mixin applied to base element.
 `--nebula-icon-button-active` | Mixin applied to element when active.
 `--nebula-icon-button-focused` | Mixin applied to element when focused.
-`--nebula-icon-button-disabled` | Mixin applied to element when disabled.
 
 The element also inherits default values from the following global theme styles. If a global theme variable has not been set, it will use the local default.
 
@@ -126,16 +126,17 @@ Custom property | Description | Default
         pointer-events: none;
         cursor: default;
         opacity: var(--nebula-ui-disabled-opacity, 0.6);
-        @apply --nebula-icon-button-disabled;
       }
     </style>
-    <nebula-icon id="icon" icon="[[_icon]]"></nebula-icon>
+    <nebula-icon id="icon" icon="[[$icon]]"></nebula-icon>
   </template>
   <script>
   (function() {
     'use strict'
 
-    class NebulaIconButton extends Nebula.ButtonBehavior(Nebula.FocusBehavior(Polymer.Element)) {
+    const computeIcon = Symbol()
+
+    class NebulaIconButton extends Nebula.ButtonBehavior(Nebula.FocusBehavior(Nebula.ElementMixin(Polymer.Element))) {
 
       static get is() { return 'nebula-icon-button' }
 
@@ -146,8 +147,7 @@ Custom property | Description | Default
           */
           icon: {
             type: String,
-            reflectToAttribute: true,
-            value: null
+            reflectToAttribute: true
           },
           /**
           * The icon to display when the element is pressed or pushed down.
@@ -155,17 +155,20 @@ Custom property | Description | Default
           */
           activeIcon: {
             type: String,
-            reflectToAttribute: true,
-            value: null
+            reflectToAttribute: true
           },
           /**
           * The `activeIcon` if provided, otherwise `icon`.
           */
-          _icon: {
-            type: String,
-            computed: '_computeIcon(icon, activeIcon, active)'
+          $icon: {
+            type: String
           }
         }
+      }
+
+      constructor() {
+        super()
+        this.compute('$icon', 'icon, activeIcon, active', this[computeIcon])
       }
 
       ready() {
@@ -176,7 +179,7 @@ Custom property | Description | Default
       /**
       * Computed property handler for `activeIcon`.
       */
-      _computeIcon(icon, activeIcon, active) {
+      [computeIcon](icon, activeIcon, active) {
         if (icon === void(0) || active === void(0)) return
         return (!!active) ? activeIcon || icon : icon
       }
