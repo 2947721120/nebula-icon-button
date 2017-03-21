@@ -1,8 +1,8 @@
 const pkg = require('./package.json');
 const argv = require('minimist')(process.argv.slice(2));
-const build = pkg.name + ' v' + pkg.version + ' (' + Math.round(new Date().getTime() / 1000) + ')'
+const build = `${pkg.name} v${pkg.version} (${Math.round(new Date().getTime() / 1000)})`
 
-console.log('BUILD: ' + build)
+console.log(`BUILD: ${build}`)
 
 module.exports = {
   verbose: false,
@@ -19,7 +19,7 @@ module.exports = {
       name: pkg.name,
       build: build,
       browsers: [{
-        browserName: 'chrome',
+        browserName: 'Chrome',
         platform: 'Windows 10',
         version: 'latest'
       }, {
@@ -27,10 +27,10 @@ module.exports = {
         platform: 'Windows 10',
         version: 'latest'
       }, {
-        browserName: 'microsoftedge',
+        browserName: 'MicrosoftEdge',
         platform: 'Windows 10',
         version: 'latest'
-      }, {
+      },{
         browserName: 'safari',
         platform: 'macOS 10.12',
         version: 'latest'

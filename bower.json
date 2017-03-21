@@ -25,7 +25,7 @@
   ],
   "main": "nebula-icon-button.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#2.0.0-rc.2",
+    "polymer": "Polymer/polymer#^2.0.0-rc.1",
     "nebula-focus-behavior": "arsnebula/nebula-focus-behavior#v2-preview",
     "nebula-button-behavior": "arsnebula/nebula-button-behavior#v2-preview",
     "nebula-icons": "arsnebula/nebula-icons#v2-preview"
