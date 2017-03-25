@@ -68,8 +68,7 @@ For more granular control, the following mixins can be used to style each state 
 Custom property | Description
 :--- | :---
 `--nebula-icon-button` | Mixin applied to base element.
-`--nebula-icon-button-active` | Mixin applied to element when active.
-`--nebula-icon-button-focused` | Mixin applied to element when focused.
+`--nebula-icon-button-icon` | Mixin applied to element icon when active.
 
 The element also inherits default values from the following global theme styles. If a global theme variable has not been set, it will use the local default.
 
@@ -98,7 +97,7 @@ Custom property | Description | Default
         outline: 0;
         height: var(--nebula-icon-button-size, 1.5rem);
         width: var(--nebula-icon-button-size, 1.5rem);
-        color: var(--nebula-icon-button-color, var(--nebula-ui-primary-color, teal));
+        color: var(--nebula-icon-button-color, inherit);
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
@@ -110,14 +109,12 @@ Custom property | Description | Default
         position: absolute;
         height: 100%;
         width: 100%;
+        padding: 0;
         margin: 0;
-      }
-      :host([active]) {
-        @apply --nebula-icon-button-active;
+        @apply --nebula-icon-button-icon;
       }
       :host([focused]) {
-        box-shadow: 0px 0px 1px 1px var(--nebula-icon-button-color, var(--nebula-ui-primary-color, teal));
-        @apply --nebula-icon-button-focused;
+        box-shadow: 0px 0px 1px 1px currentColor;
       }
       :host([hidden]) {
         display: none;
